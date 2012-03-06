@@ -1,24 +1,48 @@
 package net.irhapsody.pia;
 
+import java.util.Calendar;
 import java.util.Date;
 
-/**
- * Created by IntelliJ IDEA.
- * User: rhapsody
- * Date: 3/6/12
- * Time: 12:58 AM
- * To change this template use File | Settings | File Templates.
- */
 public class PendingOrder {
+    
+    private Address deliveryAddress;
+    private Date deliveryTime;
+
+
+    public boolean updateDeliveryInfo(RestaurantRepository restaurantRepository, Address deliveryAddress, Date deliveryTime) {
+        
+        if ( !validate(deliveryTime) ) return false;
+
+        //TODO: do it !
+//        restaurantRepository = null;
+        
+        if (restaurantRepository.isRestaurantAvailable(deliveryAddress, deliveryTime))    {
+
+            this.deliveryAddress = deliveryAddress;
+            this.deliveryTime = deliveryTime;
+            return true;
+        }
+
+        return false;
+    }
+    
+    private boolean validate(Date deliveryTime) {
+
+        Calendar earliestDeliveryTime = Calendar.getInstance();
+        earliestDeliveryTime.add(Calendar.HOUR, 1);
+
+        if (deliveryTime.before(earliestDeliveryTime.getTime())) {
+            return false;
+        }
+        
+        return true;
+    }
+
     public Address getDeliveryAddress() {
-        return null;  //To change body of created methods use File | Settings | File Templates.
+        return this.deliveryAddress;
     }
 
     public Date getDeliveryTime() {
-        return null;
-    }
-
-    public boolean updateDeliveryOrder(Address deliveryAddress, Date deleveryTime) {
-        return false;  //To change body of created methods use File | Settings | File Templates.
+        return this.deliveryTime;
     }
 }

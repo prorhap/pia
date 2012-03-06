@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface RestaurantRepository {
 
-    List findAvailableRestaurants(Address deliveryAddress, Date deliveryTime);
-    Restaurant findRestaurants(String restaurantId);
+    public List findAvailableRestaurants(Address deliveryAddress, Date deliveryTime);
+    public Restaurant findRestaurants(String restaurantId);
 
+    public boolean isRestaurantAvailable(Address deliveryAddress, Date deliveryTime);
 }

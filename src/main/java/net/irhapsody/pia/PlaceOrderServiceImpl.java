@@ -17,7 +17,7 @@ public class PlaceOrderServiceImpl implements PlaceOrderService {
 
         PendingOrder pendingOrder = pendingOrderRepository.findOrCreatePendingOrder(pendingOrderId);
 
-        boolean success = pendingOrder.updateDeliveryOrder(deliveryAddress, deleveryTime);
+        boolean success = pendingOrder.updateDeliveryInfo(repository, deliveryAddress, deleveryTime);
 
         return new PlaceOrderServiceResult(success, pendingOrder);
     }
