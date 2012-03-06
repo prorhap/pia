@@ -29,7 +29,7 @@ public class SecondPartTest {
 
     @Test
     public void testSomething() {
-        Strategy strategy = mock ( Strategy.class );
+//        Strategy strategy = mock ( Strategy.class );
         Something objectUnderTest = new Something( strategy );
 
         objectUnderTest.doSomething();
@@ -38,7 +38,7 @@ public class SecondPartTest {
     
     @Test
     public void testDelegateSomething() {
-        Strategy strategy = mock( Strategy.class );
+//        Strategy strategy = mock( Strategy.class );
         Something objectUnderTest = new Something( strategy );
         when( strategy.doValidate() ).thenReturn( true );
 

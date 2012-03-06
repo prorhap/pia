@@ -2,16 +2,19 @@ package net.irhapsody.pia;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
-
+@RunWith(MockitoJUnitRunner.class)
 public class PlaceOrderServiceTest {
 
     @Mock
@@ -50,9 +53,12 @@ public class PlaceOrderServiceTest {
         String pendingOrderId = null;
         Address deliveryAddress = RestaurantTestData.getBAD_ADDRESS();
         Date deliveryTime = RestaurantTestData.makeGoodDeliveryTime();
+        
 
         when( pendingOrderRepository.findOrCreatePendingOrder(pendingOrderId) ).thenReturn(pendingOrder);
-        when( pendingOrder.updateDeliveryOrder(deliveryAddress, deliveryTime)).thenReturn(true);
+        when( pendingOrder.updateDeliveryInfo(restaurantRepository, deliveryAddress, deliveryTime)).thenReturn(true);
+        when( pendingOrder.getDeliveryAddress() ).thenReturn(deliveryAddress);
+        when( pendingOrder.getDeliveryTime() ).thenReturn(deliveryTime);
 
 
         PlaceOrderServiceResult result = service.updateDeliveryInfo(pendingOrderId, deliveryAddress, deliveryTime);
